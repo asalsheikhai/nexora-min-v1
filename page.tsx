@@ -1,27 +1,29 @@
-import Script from "next/script";
-export const dynamic = "force-static";
-export default function ARPage() {
-  const glb = "https://modelviewer.dev/shared-assets/models/Astronaut.glb";
-  const usdz = "https://modelviewer.dev/shared-assets/models/Astronaut.usdz";
+const arUrl = process.env.NEXT_PUBLIC_AR_URL || "/ar";
+const wa = process.env.NEXT_PUBLIC_WHATSAPP || "+989120000000";
+
+export default function Home() {
   return (
     <main className="container">
-      <h1 style={{fontSize:'22px'}}>Quick AR Preview</h1>
-      <p className="small">Tap the AR button. iOS uses Quick Look; Android uses Scene Viewer/WebXR.</p>
-      <Script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js" />
-      {/* @ts-ignore */}
-      <model-viewer
-        src={glb}
-        ios-src={usdz}
-        ar
-        ar-modes="webxr scene-viewer quick-look"
-        camera-controls
-        auto-rotate
-        style={{ width: "100%", maxWidth: "520px", height: "70vh", background: "#111", borderRadius: "16px", border: "1px solid #222" }}
-        exposure="0.9"
-        shadow-intensity="1"
-        alt="NEXORA AR demo"
-      />
-      <p className="small" style={{marginTop:8}}>Later, replace GLB/USDZ URLs with your own model files.</p>
+      <section className="hero">
+        <div className="grid">
+          <h1 style={{fontSize:'28px',margin:0}}>NEXORA — AR Showroom</h1>
+          <p className="small">Launch fast. ENV-driven links for AR + WhatsApp.</p>
+          <div className="grid" style={{gridAutoFlow:'column', gridAutoColumns:'max-content'}}>
+            <a className="btn" href={arUrl}>🚀 Launch AR</a>
+            <a className="btn" href={`https://wa.me/${wa.replace('+','')}`} target="_blank">💬 WhatsApp</a>
+          </div>
+          <div className="card">
+            <div className="small">Env preview</div>
+            <div style={{fontSize:'12px',wordBreak:'break-all'}}>
+              NEXT_PUBLIC_AR_URL: <b>{arUrl}</b><br/>
+              NEXT_PUBLIC_WHATSAPP: <b>{wa}</b>
+            </div>
+          </div>
+        </div>
+        <div className="card">
+          <div style={{height:'260px',width:'100%',display:'grid',placeItems:'center',opacity:.7}}>Hero Placeholder</div>
+        </div>
+      </section>
     </main>
   );
 }
